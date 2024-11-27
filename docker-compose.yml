@@ -3,6 +3,8 @@ services:
     image: postgres
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
+    ports:
+      - "8081:8081"
     build:
       context: .
       dockerfile: Catalog/Catalog.Api/Dockerfile
