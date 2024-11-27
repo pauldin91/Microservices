@@ -1,12 +1,23 @@
 services:
+
   catalogdb:
     image: postgres
+
+  basketdb:
+    image: postgres
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
-    ports:
-      - "8081:8081"
     build:
       context: .
-      dockerfile: Catalog/Catalog.Api/Dockerfile
+      dockerfile: src/Services/Catalog/Catalog.Api/Dockerfile
+
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: src/Services/Basket/Basket.Api/Dockerfile
+
 volumes:
   postgres_catalog:
+  postgres_basket:
