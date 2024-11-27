@@ -11,7 +11,8 @@ namespace Catalog.Api.Products.CreateProduct
     {
         public UpdateProductCommandValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
+            RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
+            RuleFor(x => x.Name).NotEmpty().Length(2,150).WithMessage("Name is required with length between 2 and 150 characters");
             RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
             RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required");
             RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
@@ -26,7 +27,7 @@ namespace Catalog.Api.Products.CreateProduct
             var toBeUpdated = await session.LoadAsync<Product>(command.Id);
             
             if (toBeUpdated == null)
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(command.Id);
             
             var product = new Product
             {
