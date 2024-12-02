@@ -15,13 +15,19 @@ services:
     container_name: basketdb
     environment:
       - POSTGRES_USER=basket
-      - POSTGRES_PASSWORD=B4$ket
+      - POSTGRES_PASSWORD=B4sk3t
       - POSTGRES_DB=basket
     restart: always
     ports:
         - "5433:5432"
     volumes:
       - postgres_basket:/var/lib/postgresql/data/   
+   
+  distributedcache:
+    container_name: redis
+    restart: always
+    ports:
+        - "6379:6379"
 
   catalog.api:
     environment:
@@ -46,13 +52,30 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__BasketDbContext=Server=basketdb;Port=5432;Database=basket;User Id=basket;Password=B4$ket;Include Error Detail=true;Ssl mode=Disable
+      - ConnectionStrings__Redis=distributedcache:6379
     
     depends_on:
       - basketdb
+      - distributedcache 
 
     ports:
       - "6001:8080"
       - "6061:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  discount.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__DiscountDbContext=Data Source=discountdb
+
+    ports:
+      - "6002:8080"
+      - "6062:8081"
+
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
