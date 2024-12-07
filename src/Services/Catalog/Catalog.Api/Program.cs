@@ -1,26 +1,27 @@
-using BuildingBlocks.Behaviors;
-using BuildingBlocks.Exceptions.Handler;
 using Catalog.Api.Data;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 var assembly = typeof(Program).Assembly;
-
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
-    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
-})
-    .AddValidatorsFromAssembly(assembly)
-    .AddCarter()
-    .AddMarten(cfg =>
-    {
-        cfg.Connection(builder.Configuration.GetConnectionString(nameof(ApplicationDbContext))!);
-    })
-    .UseLightweightSessions();
+   // config.AddOpenBehavior(typeof(LoggingBehavior<,>));
+});
+builder.Services.AddValidatorsFromAssembly(assembly);
+
+builder.Services.AddCarter();
+
+builder.Services.AddMarten(opts =>
+{
+    opts.Connection(builder.Configuration.GetConnectionString(nameof(ApplicationDbContext))!);
+}).UseLightweightSessions();
 
 if (builder.Environment.IsDevelopment())
     builder.Services.InitializeMartenWith<CatalogInitialData>();
@@ -32,12 +33,14 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 app.MapCarter();
 
-app.UseExceptionHandler(opt => { });
+app.UseExceptionHandler(options => { });
 
 app.UseHealthChecks("/health",
-    new HealthCheckOptions { 
+    new HealthCheckOptions
+    {
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     });
 

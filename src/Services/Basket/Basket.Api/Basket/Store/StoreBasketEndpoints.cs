@@ -1,7 +1,5 @@
 ﻿using Basket.Api.Basket.Store;
-using Basket.Api.Models;
-using Mapster;
-using Marten.Linq.CreatedAt;
+
 
 namespace Basket.Api.Basket.Get
 {

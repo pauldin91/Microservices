@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Basket.Api.Data
 {
-    public class CachedBasketRepository(IDistributedCache cache, IBasketRepository repository) : IBasketRepository
+    public class CachedBasketRepository(IDistributedCache cache, IBasketRepository repository) : ICachedBasketRepository
     {
         public async Task<bool> DeleteBasket(string username, CancellationToken cancellationToken = default)
         {
@@ -24,7 +24,7 @@ namespace Basket.Api.Data
 
             var basket = await repository.GetBasket(username, cancellationToken);
 
-            await cache.SetStringAsync(username, JsonSerializer.Serialize(basket),cancellationToken);
+            await cache.SetStringAsync(username, JsonSerializer.Serialize(basket), cancellationToken);
 
             return basket;
         }
@@ -32,7 +32,7 @@ namespace Basket.Api.Data
         public async Task<ShoppingCart> StoreBasket(ShoppingCart cart, CancellationToken cancellationToken = default)
         {
             var basket = await repository.StoreBasket(cart, cancellationToken);
-            await cache.SetStringAsync(basket.Username, JsonSerializer.Serialize(basket),cancellationToken);
+            await cache.SetStringAsync(basket.Username, JsonSerializer.Serialize(basket), cancellationToken);
             return basket;
         }
     }
