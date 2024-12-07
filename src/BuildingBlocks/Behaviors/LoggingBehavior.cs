@@ -28,7 +28,7 @@ namespace BuildingBlocks.Behaviors
 
             logger.LogInformation("[END] Handled {Request} with {Response}", typeof(TRequest).Name, typeof(TResponse).Name);
 
-            return await next();
+            return response;
         }
     }
 }
