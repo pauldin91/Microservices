@@ -1,13 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ordering.Domain.Exceptions;
 
 namespace Ordering.Domain.ValueObjects
 {
     public record ProductId
     {
-        public Guid Value { get; set; }
+        private ProductId(Guid value)
+        {
+            Value = value;
+        }
+
+        public Guid Value { get; }
+
+        public static ProductId Of(Guid value)
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            if (value == Guid.Empty)
+            {
+                throw new DomainException("ProductId cannot be empty.");
+            }
+            return new ProductId(value);
+        }
     }
 }
