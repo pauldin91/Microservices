@@ -4,10 +4,8 @@ namespace Ordering.Domain.ValueObjects
 {
     public record OrderItemId
     {
-        private OrderItemId(Guid value) => Value = value;
-
         public Guid Value { get; }
-
+        private OrderItemId(Guid value) => Value = value;
         public static OrderItemId Of(Guid value)
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -15,6 +13,7 @@ namespace Ordering.Domain.ValueObjects
             {
                 throw new DomainException("OrderItemId cannot be empty.");
             }
+
             return new OrderItemId(value);
         }
     }

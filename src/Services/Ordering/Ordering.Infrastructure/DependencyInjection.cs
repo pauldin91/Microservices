@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ordering.Infrastructure.Data;
+using Ordering.Infrastructure.Data.Interceptors;
 
 namespace Ordering.Infrastructure
 {
@@ -9,7 +11,13 @@ namespace Ordering.Infrastructure
     {
         public static IServiceCollection AddInfrastructureExtensions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<OrderingDbContext>(cfg => cfg.UseNpgsql(configuration.GetConnectionString(nameof(OrderingDbContext))));
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+            services.AddDbContext<OrderingDbContext>((sp, cfg) =>
+            {
+                cfg.AddInterceptors(sp.GetRequiredService<ISaveChangesInterceptor>());
+                cfg.UseNpgsql(configuration.GetConnectionString(nameof(OrderingDbContext)));
+            });
             return services;
         }
     }

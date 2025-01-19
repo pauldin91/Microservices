@@ -11,7 +11,7 @@ namespace Ordering.Infrastructure.Data
         { }
 
         public DbSet<Customer> Customers => Set<Customer>();
-        public DbSet<Order> Order => Set<Order>();
+        public DbSet<Order> Orders => Set<Order>();
         public DbSet<Product> Products => Set<Product>();
         public DbSet<OrderItem> OrderItems => Set<OrderItem>();
 
