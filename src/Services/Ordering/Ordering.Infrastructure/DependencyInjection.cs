@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Application.Data;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Data.Interceptors;
 
@@ -18,6 +19,8 @@ namespace Ordering.Infrastructure
                 cfg.AddInterceptors(sp.GetRequiredService<ISaveChangesInterceptor>());
                 cfg.UseNpgsql(configuration.GetConnectionString(nameof(OrderingDbContext)));
             });
+
+            services.AddScoped<IApplicationDbContext, OrderingDbContext>();
             return services;
         }
     }
