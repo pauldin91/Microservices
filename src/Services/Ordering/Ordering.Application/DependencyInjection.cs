@@ -8,11 +8,11 @@ namespace Ordering.Application
     {
         public static IServiceCollection AddApplicationExtensions(this IServiceCollection services)
         {
-            services.AddMediatR(cfg =>
+            services.AddMediatR(config =>
             {
-                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
-                cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+                config.AddOpenBehavior(typeof(LoggingBehavior<,>));
             });
             return services;
         }

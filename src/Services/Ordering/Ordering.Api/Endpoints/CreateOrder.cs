@@ -1,3 +1,5 @@
+using Ordering.Application.Orders.Commands;
+
 namespace Ordering.Api.Endpoints;
 
 public record CreateOrderRequest(OrderDto Order);
