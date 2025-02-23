@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Application", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "src\Services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{4A2B5445-0CA2-4E6F-A84E-D602D0536853}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGetway", "YarpApiGetway\YarpApiGetway\YarpApiGetway.csproj", "{3B47CEB3-36BD-4878-A322-5496302E7E6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{4A2B5445-0CA2-4E6F-A84E-D602D0536853}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A2B5445-0CA2-4E6F-A84E-D602D0536853}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A2B5445-0CA2-4E6F-A84E-D602D0536853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B47CEB3-36BD-4878-A322-5496302E7E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B47CEB3-36BD-4878-A322-5496302E7E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B47CEB3-36BD-4878-A322-5496302E7E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B47CEB3-36BD-4878-A322-5496302E7E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +107,6 @@ Global
 		{9EDF96D8-B3CC-4082-92C5-202C50D59EE2} = {23FC041B-544C-4F1B-B19D-5C8B71A3FDD8}
 		{8EB88169-1F18-44F0-AAEA-85BD1C2294A4} = {23FC041B-544C-4F1B-B19D-5C8B71A3FDD8}
 		{4A2B5445-0CA2-4E6F-A84E-D602D0536853} = {23FC041B-544C-4F1B-B19D-5C8B71A3FDD8}
+		{3B47CEB3-36BD-4878-A322-5496302E7E6F} = {D9CAE545-A648-43D7-8556-A03B41FD18CD}
 	EndGlobalSection
 EndGlobal
