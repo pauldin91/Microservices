@@ -1,7 +1,4 @@
-using Ordering.Application.Dtos;
-using Ordering.Application.Orders;
-
-namespace Catalog.Api.Endpoints;
+namespace Ordering.Api.Endpoints;
 
 public record UpdateOrderRequest(OrderDto Order);
 public record UpdateOrderResponse(bool IsSuccess);
@@ -13,11 +10,11 @@ public class UpdateOrder : ICarterModule
         app.MapPut("/orders", async (UpdateOrderRequest request, ISender sender) =>
             {
                 var command = request.Adapt<UpdateOrderCommand>();
-            
+
                 var result = await sender.Send(command);
-    
+
                 var response = result.Adapt<UpdateOrderResponse>();
-            
+
                 return Results.Ok(response);
             })
             .WithName("UpdateOrder")

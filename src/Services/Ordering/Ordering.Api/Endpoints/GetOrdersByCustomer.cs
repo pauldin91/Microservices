@@ -1,7 +1,6 @@
-using Ordering.Application.Dtos;
 using Ordering.Application.Orders.Queries;
 
-namespace Catalog.Api.Endpoints;
+namespace Ordering.Api.Endpoints;
 
 public record GetOrdersByCustomerResponse(IEnumerable<OrderDto> OrderDtos);
 
@@ -11,11 +10,10 @@ public class GetOrdersByCustomer : ICarterModule
     {
         app.MapGet("/orders/{customerId}", async (Guid customerId, ISender sender) =>
             {
-            
                 var result = await sender.Send(new GetOrdersByCustomerQuery(customerId));
-    
+
                 var response = result.Adapt<GetOrdersByCustomerResponse>();
-            
+
                 return Results.Ok(response);
             })
             .WithName("GetOrdersByCustomer")

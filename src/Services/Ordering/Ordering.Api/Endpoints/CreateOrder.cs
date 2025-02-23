@@ -1,8 +1,4 @@
-using Ordering.Application.Dtos;
-using Ordering.Application.Orders;
-
-namespace Catalog.Api.Endpoints;
-
+namespace Ordering.Api.Endpoints;
 
 public record CreateOrderRequest(OrderDto Order);
 public record CreateOrderResponse(Guid Id);
@@ -14,12 +10,12 @@ public class CreateOrder : ICarterModule
         app.MapPost("/orders", async (CreateOrderRequest request, ISender sender) =>
         {
             var command = request.Adapt<CreateOrderCommand>();
-            
+
             var result = await sender.Send(command);
-    
+
             var response = result.Adapt<CreateOrderResponse>();
-            
-            return Results.Created($"/orders/{response.Id}",response);
+
+            return Results.Created($"/orders/{response.Id}", response);
         })
             .WithName("CreateOrder")
             .Produces<CreateOrderResponse>(StatusCodes.Status201Created)
