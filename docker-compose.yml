@@ -9,6 +9,9 @@ services:
   orderdb:
     image: postgres
 
+  messagebroker:
+    image: rabbitmq:4.0.6-management
+
   distributedcache:
     image: redis
 

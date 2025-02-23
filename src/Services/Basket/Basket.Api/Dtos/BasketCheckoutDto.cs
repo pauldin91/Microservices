@@ -4,7 +4,7 @@
     {
         public string UserName { get; set; } = default!;
         public Guid CustomerId { get; set; } = default!;
-        public string TotalPrice { get; set; } = default!;
+        public int TotalPrice { get; set; } = default!;
 
 
         public string FirstName { get; set; } = default!;

@@ -40,6 +40,17 @@ services:
     volumes:
       - postgres_order:/var/lib/postgresql/data/   
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  messagebroker:
+    container_name: messagebroker
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest 
+    restart: always
+    ports: 
+      - "5672:5672"
+      - "15672:15672"
    
   distributedcache:
     container_name: redis
