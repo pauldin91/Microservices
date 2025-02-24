@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1BDB296-5A7E-4577-8AB8-0814FB4FE78E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0DBD6574-4909-41E0-A08F-630452948641}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{D9CAE545-A648-43D7-8556-A03B41FD18CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{D3753DCD-01E3-4A13-8F21-1E866320BA29}"
@@ -42,6 +40,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.Messaging", "src\BuildingBlocks\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj", "{ACC53D98-8F3C-4BDC-8325-BDCD3426B5FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "src\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj", "{EFD6D5F1-12C7-4A02-A358-F1F90015A658}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{62CF9C12-7CA1-4034-BFDE-7FA1BA4FA9D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Web", "src\WebApps\Shopping.Web\Shopping.Web.csproj", "{93CD5E08-C606-4112-9572-AD2FA02E7394}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{EFD6D5F1-12C7-4A02-A358-F1F90015A658}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFD6D5F1-12C7-4A02-A358-F1F90015A658}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFD6D5F1-12C7-4A02-A358-F1F90015A658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CD5E08-C606-4112-9572-AD2FA02E7394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CD5E08-C606-4112-9572-AD2FA02E7394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CD5E08-C606-4112-9572-AD2FA02E7394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CD5E08-C606-4112-9572-AD2FA02E7394}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,5 +121,7 @@ Global
 		{3B47CEB3-36BD-4878-A322-5496302E7E6F} = {D9CAE545-A648-43D7-8556-A03B41FD18CD}
 		{ACC53D98-8F3C-4BDC-8325-BDCD3426B5FC} = {D3753DCD-01E3-4A13-8F21-1E866320BA29}
 		{EFD6D5F1-12C7-4A02-A358-F1F90015A658} = {D3753DCD-01E3-4A13-8F21-1E866320BA29}
+		{62CF9C12-7CA1-4034-BFDE-7FA1BA4FA9D6} = {A1BDB296-5A7E-4577-8AB8-0814FB4FE78E}
+		{93CD5E08-C606-4112-9572-AD2FA02E7394} = {62CF9C12-7CA1-4034-BFDE-7FA1BA4FA9D6}
 	EndGlobalSection
 EndGlobal
