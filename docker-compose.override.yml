@@ -10,18 +10,53 @@ services:
         - "5432:5432"
     volumes:
       - postgres_catalog:/var/lib/postgresql/data/   
+      -  ./init.sql:/docker-entrypoint-initdb.d/init.sql
        
   basketdb:
     container_name: basketdb
     environment:
       - POSTGRES_USER=basket
-      - POSTGRES_PASSWORD=B4$ket
+      - POSTGRES_PASSWORD=B4sk3t
       - POSTGRES_DB=basket
+      - GrpcSettings__DiscountUrl=https://discount.grpc:8081 
+
     restart: always
     ports:
         - "5433:5432"
     volumes:
-      - postgres_basket:/var/lib/postgresql/data/   
+      - postgres_basket:/var/lib/postgresql/data/ 
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql- 
+        
+
+  orderdb:
+    container_name: orderdb
+    environment:
+      - POSTGRES_USER=order
+      - POSTGRES_PASSWORD=0rd3r
+      - POSTGRES_DB=order
+    restart: always
+    ports:
+        - "5434:5432"
+    volumes:
+      - postgres_order:/var/lib/postgresql/data/   
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  messagebroker:
+    container_name: messagebroker
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest 
+    restart: always
+    ports: 
+      - "5672:5672"
+      - "15672:15672"
+   
+  distributedcache:
+    container_name: redis
+    restart: always
+    ports:
+        - "6379:6379"
 
   catalog.api:
     environment:
@@ -46,13 +81,30 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__BasketDbContext=Server=basketdb;Port=5432;Database=basket;User Id=basket;Password=B4$ket;Include Error Detail=true;Ssl mode=Disable
+      - ConnectionStrings__Redis=distributedcache:6379
     
     depends_on:
       - basketdb
+      - distributedcache 
 
     ports:
       - "6001:8080"
       - "6061:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  discount.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__DiscountDbContext=Data Source=discountdb
+
+    ports:
+      - "6002:8080"
+      - "6062:8081"
+
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

@@ -6,7 +6,7 @@ namespace Basket.Api.Basket.Delete
 
     public record DeleteBasketResult(bool IsSuccess);
 
-    public class DeleteBasketHandler(IBasketRepository basketRepository) : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
+    public class DeleteBasketHandler(ICachedBasketRepository basketRepository) : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
     {
         public async Task<DeleteBasketResult> Handle(DeleteBasketCommand request, CancellationToken cancellationToken)
         {

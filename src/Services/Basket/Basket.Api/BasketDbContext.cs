@@ -1,3 +1,3 @@
-﻿internal class BasketDbContext
+﻿public class BasketDbContext
 {
 }

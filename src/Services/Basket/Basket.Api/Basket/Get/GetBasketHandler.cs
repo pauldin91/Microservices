@@ -9,7 +9,7 @@ namespace Basket.Api.Basket.Get
 
     public record GetBasketResult(ShoppingCart Cart);
 
-    public class GetBasketHandler(IBasketRepository basketRepository) : IQueryHandler<GetBasketQuery, GetBasketResult>
+    public class GetBasketHandler(ICachedBasketRepository basketRepository) : IQueryHandler<GetBasketQuery, GetBasketResult>
     {
         public async Task<GetBasketResult> Handle(GetBasketQuery request, CancellationToken cancellationToken)
         {
