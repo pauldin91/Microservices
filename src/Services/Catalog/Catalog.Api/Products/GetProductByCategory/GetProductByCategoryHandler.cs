@@ -6,7 +6,7 @@ namespace Catalog.Api.Products.GetProductById;
 
 
 public record GetProductByCategoryQuery(string Category) : IQuery<GetProductByCategoryResult>;
-public record GetProductByCategoryResult(IEnumerable<Product> Product);
+public record GetProductByCategoryResult(IEnumerable<Product> Products);
 
 internal class GetProductByCategoryHandler(IDocumentSession session) : IQueryHandler<GetProductByCategoryQuery, GetProductByCategoryResult>   
 {

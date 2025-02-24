@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Application", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "src\Services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{4A2B5445-0CA2-4E6F-A84E-D602D0536853}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGetway", "YarpApiGetway\YarpApiGetway\YarpApiGetway.csproj", "{3B47CEB3-36BD-4878-A322-5496302E7E6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarpApiGetway", "src\ApiGateways\YarpApiGetway\YarpApiGetway.csproj", "{3B47CEB3-36BD-4878-A322-5496302E7E6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.Messaging", "src\BuildingBlocks\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj", "{ACC53D98-8F3C-4BDC-8325-BDCD3426B5FC}"
 EndProject
