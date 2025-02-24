@@ -82,10 +82,15 @@ services:
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__BasketDbContext=Server=basketdb;Port=5432;Database=basket;User Id=basket;Password=B4$ket;Include Error Detail=true;Ssl mode=Disable
       - ConnectionStrings__Redis=distributedcache:6379
+      - MessageBroker__Host=amqp://localhost:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest 
     
     depends_on:
       - basketdb
-      - distributedcache 
+      - distributedcache
+      - discount.grpc
+      - messagebroker
 
     ports:
       - "6001:8080"
@@ -105,6 +110,25 @@ services:
       - "6002:8080"
       - "6062:8081"
 
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  ordering.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - MessageBroker__Host=amqp://localhost:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+      - FeatureManagement__OrderFullfilment=false 
+    depends_on:
+      - orderdb
+      - messagebroker
+    ports:
+      - "8080"
+      - "8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
